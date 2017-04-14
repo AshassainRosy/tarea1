@@ -1,0 +1,81 @@
+<html>
+<head>
+	<title></title>
+	
+	<script src="jQuery/jquery-2.2.3.min.js">
+	</script>
+	<script>
+		function objetos(){
+			this.vector=new Array();
+			this.insertar=function(object){
+				this.vector.push(object);
+			};
+			this.mostrar=function(){
+				for(var i=0;i<this.vector.length;i++){
+					console.log(this.vector[i]);
+				}
+			};
+			this.buscar=function(object){
+				for (var i = 0; i <this.vector.length; i++) {
+					if(object==this.vector[i]){
+						return i;
+					}
+				}
+				return -1;
+			};
+			this.remove=function(object) {
+				var num=this.buscar(object);
+				if(num != -1){
+					this.vector.splice(num, 1);
+				}else{
+					console.log('el valor no fue encontrado');
+				}
+			};
+			this.eliminar=function(){
+				for(var i=0;i<this.vector.length;i++){
+					for(var j=i+1;j<this.vector.length;j++){
+						if(this.vector[i]==this.vector[j]){
+							this.vector.splice(j, 1);
+							j--;
+						}
+					}
+				}
+			}
+		}
+		$(function () {
+			var vect=new objetos();
+			vect.insertar("h");
+			vect.insertar("h");
+			vect.insertar("c");
+			vect.insertar("e");
+			vect.insertar("a");
+			vect.insertar("f");
+			vect.insertar("s");
+			vect.insertar("s");
+			vect.insertar("s");
+			vect.insertar("a");
+			vect.insertar("h");
+			vect.insertar("a");
+			vect.insertar("s");
+			vect.insertar("h");
+			console.log("------------mostrando todo--------------------------------------------");
+			vect.mostrar();
+			console.log("------------Buscando el valor de M--------------------------------------------");
+			if(vect.buscar("M") != -1){
+				console.log('se encontro el valor en la posicion: '+vect.buscar("M"));
+			}else{
+				console.log("El valor buscado no existe");
+			}
+			console.log("------------eliminar valor 'f'--------------------------------------------");
+			vect.remove("f");
+			vect.mostrar();
+			console.log("------------eliminar repetidos (se conserva el primero)--------------------------------------------");
+			vect.eliminar();
+			vect.mostrar();
+		});
+	</script>
+</head>
+<body>
+<h1>Todo esta corriendo en consola de navegador</h1>
+</body>
+</html>
